@@ -1,0 +1,20 @@
+.header { grid-area: header; }
+.score { grid-area: score; }
+.character { grid-area: character; }
+.kart { grid-area: kart; }
+.wheels { grid-area: wheels; }
+.glider { grid-area: glider; }
+.footer {grid-area: footer; }
+
+.grid-container {
+	display: grid;
+	grid-template-areas:
+	'header header header'
+	'score score score'
+	'character character character'
+	'kart wheels glider'
+	'footer footer footer';
+	grid-gap: 10px;
+	background-color: #2196F3;
+	padding: 10px;
+}
