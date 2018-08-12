@@ -33,6 +33,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="grid-container">
+				<div className="header">MKR</div>
 				<Item primary className="score">
 					{this.state.targetScore}
 				</Item>
