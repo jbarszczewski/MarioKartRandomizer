@@ -33,7 +33,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="grid-container">
-				<div className="header">MKR</div>
+				<div className="header">Mario Kart DX8 Randomizer</div>
 				<Item primary className="score">
 					{this.state.targetScore}
 				</Item>
@@ -49,7 +49,7 @@ class App extends Component {
 				<Item className="glider">
 					<img src={this.state.glider.image} alt={this.state.glider.name} />
 				</Item>
-				<Button className="footer" onClick={() => this.setState(this.generateState())}>Generate</Button>
+				<Button className="footer" onClick={() => this.setState(this.generateState())}>Randomize</Button>
 			</div>
 		);
 	}
