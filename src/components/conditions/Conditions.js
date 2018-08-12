@@ -6,21 +6,22 @@ import './Conditions.css';
 class Conditions extends Component {
 	constructor(props) {
 		super(props)
-		const characters = this.importAll(require.context('../../media/characters', false, /.png$/));
-		const karts = this.importAll(require.context('../../media/karts', false, /.png$/));
-		const wheels = this.importAll(require.context('../../media/wheels', false, /.png$/));
-		const gliders = this.importAll(require.context('../../media/gliders', false, /.png$/));
-		this.state = {
-			targetScore: this.generateTargetScore(),
-			character: characters[Math.floor(Math.random() * characters.length)],
-			kart: karts[Math.floor(Math.random() * karts.length)],
-			wheels: wheels[Math.floor(Math.random() * wheels.length)],
-			glider: gliders[Math.floor(Math.random() * gliders.length)]
-		}
+		this.characters = this.importAll(require.context('../../media/characters', false, /.png$/));
+		this.karts = this.importAll(require.context('../../media/karts', false, /.png$/));
+		this.wheels = this.importAll(require.context('../../media/wheels', false, /.png$/));
+		this.gliders = this.importAll(require.context('../../media/gliders', false, /.png$/));
+
+		this.state = this.generateState()
 	}
 
-	generateTargetScore() {
-		return Math.floor(Math.random() * 30) + 50
+	generateState() {
+		return {
+			targetScore: Math.floor(Math.random() * 30) + 50,
+			character: this.characters[Math.floor(Math.random() * this.characters.length)],
+			kart: this.karts[Math.floor(Math.random() * this.karts.length)],
+			wheels: this.wheels[Math.floor(Math.random() * this.wheels.length)],
+			glider: this.gliders[Math.floor(Math.random() * this.gliders.length)]
+		}
 	}
 
 	importAll(r) {
@@ -47,7 +48,7 @@ class Conditions extends Component {
 				<Item className="glider">
 					<img src={this.state.glider.image} alt={this.state.glider.name} />
 				</Item>
-				<Button className="footer" onClick={() => this.setState({ targetScore: this.generateTargetScore() })}>Generate</Button>
+				<Button className="footer" onClick={() => this.setState(this.generateState())}>Generate</Button>
 			</div>
 		);
 	}
