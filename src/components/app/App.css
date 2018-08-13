@@ -10,8 +10,8 @@
 	display: grid;
 	grid-template-areas:
 	'header header header'
-	'score score score'
-	'character character character'
+	'score score options'
+	'character character options'
 	'kart wheels glider'
 	'footer footer footer';
 	grid-gap: 10px;

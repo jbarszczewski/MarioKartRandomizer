@@ -10,17 +10,31 @@ class App extends Component {
 		this.karts = this.importAll(require.context('../../media/karts', false, /.png$/));
 		this.wheels = this.importAll(require.context('../../media/wheels', false, /.png$/));
 		this.gliders = this.importAll(require.context('../../media/gliders', false, /.png$/));
+		this.state = this.generateState("pro");
 
-		this.state = this.generateState()
+		this.modeChanged = this.modeChanged.bind(this);
 	}
 
-	generateState() {
+	generateState(mode) {
+		let newTargetScore;
+		switch (mode) {
+		case "john":
+			newTargetScore = 65;
+			break;
+		case "alejandro":
+			newTargetScore = 45;
+			break;
+		default:
+			newTargetScore = Math.floor(Math.random() * 30) + 50;
+			break;
+		}
 		return {
-			targetScore: Math.floor(Math.random() * 30) + 50,
+			targetScore: newTargetScore,
 			character: this.characters[Math.floor(Math.random() * this.characters.length)],
 			kart: this.karts[Math.floor(Math.random() * this.karts.length)],
 			wheels: this.wheels[Math.floor(Math.random() * this.wheels.length)],
-			glider: this.gliders[Math.floor(Math.random() * this.gliders.length)]
+			glider: this.gliders[Math.floor(Math.random() * this.gliders.length)],
+			mode: mode
 		}
 	}
 
@@ -30,10 +44,21 @@ class App extends Component {
 		});
 	}
 
+	modeChanged(e) {
+		this.setState(this.generateState(e.target.value));
+	}
+
 	render() {
 		return (
 			<div className="grid-container">
 				<div className="header">Mario Kart DX8 Randomizer</div>
+				<div className="options">
+					<select onChange={this.modeChanged} defaultValue="pro">
+						<option value="pro">Pro</option>
+						<option value="john">John</option>
+						<option value="alejandro">Alejandro</option>
+					</select>
+				</div>
 				<Item primary className="score">
 					{this.state.targetScore}
 				</Item>
@@ -49,7 +74,7 @@ class App extends Component {
 				<Item className="glider">
 					<img src={this.state.glider.image} alt={this.state.glider.name} />
 				</Item>
-				<Button className="footer" onClick={() => this.setState(this.generateState())}>Randomize</Button>
+				<Button className="footer" onClick={() => this.setState(this.generateState(this.state.mode))}>Randomize</Button>
 			</div>
 		);
 	}
