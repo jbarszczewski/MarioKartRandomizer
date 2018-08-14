@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Item from '../shared/Item';
+import { Item, ScoreItem } from '../shared/Item';
 import Button from '../shared/Button';
 import './App.css';
 
@@ -25,7 +25,7 @@ class App extends Component {
 			newTargetScore = 45;
 			break;
 		default:
-			newTargetScore = Math.floor(Math.random() * 30) + 50;
+			newTargetScore = Math.floor(Math.random() * 20) + 60;
 			break;
 		}
 		return {
@@ -59,20 +59,24 @@ class App extends Component {
 						<option value="alejandro">Alejandro</option>
 					</select>
 				</div>
-				<Item primary className="score">
+				<ScoreItem primary className="score">
 					{this.state.targetScore}
-				</Item>
+				</ScoreItem>
 				<Item primary className="character">
 					<img src={this.state.character.image} alt={this.state.character.name} />
+					{this.state.character.name}
 				</Item>
 				<Item className="kart">
 					<img src={this.state.kart.image} alt={this.state.kart.name} />
+					{this.state.kart.name}
 				</Item>
 				<Item className="wheels">
 					<img src={this.state.wheels.image} alt={this.state.wheels.name} />
+					{this.state.wheels.name}
 				</Item>
 				<Item className="glider">
 					<img src={this.state.glider.image} alt={this.state.glider.name} />
+					{this.state.glider.name}
 				</Item>
 				<Button className="footer" onClick={() => this.setState(this.generateState(this.state.mode))}>Randomize</Button>
 			</div>
